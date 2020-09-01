@@ -1,0 +1,19 @@
+﻿@page
+@model SampleCoreApp.Pages.Restaurant.ListModel
+@{
+    <h1>Restaurant</h1>
+    
+
+}
+
+<table class="table">
+    @foreach(var res in Model.Restaurants)
+    {
+    <tr>
+        <td>@res.Name</td>
+        <td>@res.Location</td>
+        <td>@res.Cusine</td>
+    </tr>
+    }
+</table>
+@Model.Message
