@@ -13,11 +13,16 @@ namespace SampleCoreApp.Pages.Restaurant
 {
     public class ListModel : PageModel
     {
-       
+
         private readonly IConfiguration config;
         private readonly IRestaurantData restaurantData;
 
         public string Message { get; set; }
+
+        //To bind search term propert for input & output data
+        //to send property while get request
+        [BindProperty(SupportsGet = true)]
+        public string SearchTerm { get; set; }
         public string ConfigurationMessage { get; set; }
         public IEnumerable<Service.Restaurant> Restaurants { get; set; }
 
@@ -28,11 +33,12 @@ namespace SampleCoreApp.Pages.Restaurant
             this.config = config;
             this.restaurantData = restaurantData;
         }
-        public void OnGet()
+        public void OnGet(string SearchTerm)
         {
             Message = "Enjoy your meal at these restaurants!!";
             ConfigurationMessage = config["Message"];
-            Restaurants = restaurantData.GetAll();
+
+            Restaurants = restaurantData.GetRestaurantsByName(SearchTerm);
         }
     }
 }

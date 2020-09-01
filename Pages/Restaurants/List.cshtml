@@ -5,7 +5,19 @@
     
 
 }
-
+<form  method="get">
+    <div class="form-group">
+        <div class="input-group">
+            @* asp-for acts as two way data binding *@
+            <input type="search" class="form-control" asp-for="SearchTerm"/>
+            <span class="input-group-btn">
+                <button class="btn btn-default">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+</form>
 <table class="table">
     @foreach(var res in Model.Restaurants)
     {
