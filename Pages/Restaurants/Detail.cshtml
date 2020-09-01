@@ -1,0 +1,21 @@
+﻿@page "{restaurantId:int}"
+@model SampleCoreApp.Pages.Restaurants.DetailModel
+@{
+}
+
+
+<h2>@Model.Restaurant.Name</h2>
+<div>
+    Id: @Model.Restaurant.Id
+</div>
+<br />
+<div>
+    Location: @Model.Restaurant.Location
+</div>
+<br />
+<div>
+    Cusine: @Model.Restaurant.Cusine
+</div>
+<br />
+
+<a asp-page="./List" class="btn btn-dark">All Restaurants</a>

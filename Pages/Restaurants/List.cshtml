@@ -1,15 +1,15 @@
-﻿@page
+﻿@page 
 @model SampleCoreApp.Pages.Restaurant.ListModel
 @{
     <h1>Restaurant</h1>
-    
+
 
 }
-<form  method="get">
+<form method="get">
     <div class="form-group">
         <div class="input-group">
             @* asp-for acts as two way data binding *@
-            <input type="search" class="form-control" asp-for="SearchTerm"/>
+            <input type="search" class="form-control" asp-for="SearchTerm" />
             <span class="input-group-btn">
                 <button class="btn btn-default">
                     <i class="fa fa-search"></i>
@@ -19,13 +19,19 @@
     </div>
 </form>
 <table class="table">
-    @foreach(var res in Model.Restaurants)
+    @foreach (var res in Model.Restaurants)
     {
-    <tr>
-        <td>@res.Name</td>
-        <td>@res.Location</td>
-        <td>@res.Cusine</td>
-    </tr>
+        <tr>
+            <td>@res.Name</td>
+            <td>@res.Location</td>
+            <td>@res.Cusine</td>
+            <td>
+                <a asp-page="./Detail" asp-route-restaurantId="@res.Id">
+                    <i class="fa fa-search-location">Details</i>
+                </a>
+
+            </td>
+        </tr>
     }
 </table>
 @Model.Message
