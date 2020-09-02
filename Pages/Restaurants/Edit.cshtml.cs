@@ -26,23 +26,40 @@ namespace SampleCoreApp.Pages.Restaurants
             this.restaurantData = restaurantData;
             this.htmlHelper = htmlHelper;
         }
-        public IActionResult OnGet(int restaurantId)
+        public IActionResult OnGet(int? restaurantId)
         {
             Cuisines = htmlHelper.GetEnumSelectList<CusineType>();
-            Restaurant = restaurantData.GetRestaurantById(restaurantId);
+            if (restaurantId.HasValue)
+            {
+                Restaurant = restaurantData.GetRestaurantById(restaurantId.Value);
+            }
+            else
+            {
+                Restaurant = new Service.Restaurant();
+            }
             if (Restaurant == null) RedirectToPage("./NotFound");
             return Page();
         }
 
         public IActionResult OnPost()
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                Restaurant = restaurantData.Update(Restaurant);
-                restaurantData.Commit();
+                Cuisines = htmlHelper.GetEnumSelectList<CusineType>();
+                return Page();
             }
-            Cuisines = htmlHelper.GetEnumSelectList<CusineType>();
-            return Page();
+            if (Restaurant.Id > 0) 
+            {
+                restaurantData.Update(Restaurant);
+            }
+            else
+            {
+                restaurantData.Add(Restaurant);
+            }
+            restaurantData.Commit();
+            TempData["Message"] = "Restaurant Saved !!";
+            return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id});
+
         }
     }
 }

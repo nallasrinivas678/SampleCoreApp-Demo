@@ -12,6 +12,10 @@ namespace SampleCoreApp.Pages.Restaurants
     public class DetailModel : PageModel
     {
         private readonly IRestaurantData restaurantData;
+
+        //Temp data usage in core
+        [TempData]
+        public string Message { get; set; }
         public Service.Restaurant Restaurant { get; set; }
 
         public DetailModel(IRestaurantData restaurantData)
