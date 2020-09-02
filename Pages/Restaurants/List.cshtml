@@ -21,17 +21,23 @@
 <table class="table">
     @foreach (var res in Model.Restaurants)
     {
-        <tr>
-            <td>@res.Name</td>
-            <td>@res.Location</td>
-            <td>@res.Cusine</td>
-            <td>
-                <a asp-page="./Detail" asp-route-restaurantId="@res.Id">
-                    <i class="fa fa-search-location">Details</i>
-                </a>
+    <tr>
+        <td>@res.Name</td>
+        <td>@res.Location</td>
+        <td>@res.Cusine</td>
+        <td>
+            <a asp-page="./Detail" asp-route-restaurantId="@res.Id">
+                <i class="fa fa-search-location">Details</i>
+            </a>
 
-            </td>
-        </tr>
+        </td>
+        <td>
+            <a asp-page="./Edit" asp-route-restaurantId="@res.Id">
+                <i class="fa fa-edit">Edit</i>
+            </a>
+
+        </td>
+    </tr>
     }
 </table>
 @Model.Message
