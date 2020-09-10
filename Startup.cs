@@ -32,7 +32,8 @@ namespace SampleCoreApp
             });
 
             //singleton will be replace for prod
-            services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
+            //services.AddSingleton<IRestaurantData, SqlRestaurantData>();
+            services.AddScoped<IRestaurantData, SqlRestaurantData>(); //Use scoped to have single context for each request
 
             services.AddRazorPages();
         }
