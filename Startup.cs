@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Restaurant.Core.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace SampleCoreApp
 {
@@ -24,6 +25,12 @@ namespace SampleCoreApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //To add database connection
+            services.AddDbContextPool<FoodDBContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("Food"));
+            });
+
             //singleton will be replace for prod
             services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
 
